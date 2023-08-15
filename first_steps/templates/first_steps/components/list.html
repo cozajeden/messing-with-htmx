@@ -1,0 +1,10 @@
+<div class="list" id="list">
+    <div class="list-header">{{ title }}</div>
+    {% if name %}
+        <div hx-get="/name-page/{{ page }}/{{ name }}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <div hx-get="/page-numbers/{{ name }}" hx-trigger="load" hx-swap="outerHTML"></div>
+    {% else %}
+        <div hx-get="/name-page/{{ page }}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <div hx-get="/page-numbers" hx-trigger="load" hx-swap="outerHTML"></div>
+    {% endif %}
+</div>

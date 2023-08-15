@@ -1,0 +1,21 @@
+<div class="list-pages" id="list-pages">
+    {% for page in pages %}
+        <div 
+            {% if name %}
+                hx-get="/name-page/{{ page }}/{{ name }}"
+            {% else %}
+                hx-get="/name-page/{{ page }}"
+            {% endif %}
+            hx-target="#list-items"
+        >
+            <div
+            {% if name %}
+                hx-get="/search-element/{{ page }}/{{ name }}"
+            {% else %}
+                hx-get="/search-element/{{ page }}"
+            {% endif %}
+                hx-target="#search-element"
+            ><span>{{ page }}</span></div>
+        </div>
+    {% endfor %}
+</div>

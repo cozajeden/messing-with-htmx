@@ -1,0 +1,13 @@
+<div id="search-element">
+    <label for="search-name">Search for name:</label>
+    <input type="text" id="search-name" placeholder="Search..."
+        hx-get="/list/{{ page }}"
+        hx-trigger="keyup changed delay:500ms"
+        hx-swap="outerHTML"
+        hx-target="#list"
+        name="name"
+        {% if name %}
+            value="{{ name }}"
+        {% endif %}
+    >
+</div>

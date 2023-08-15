@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'first_steps/css/name_list.css' %}">
+    <div class="container">
+        <div hx-get="/list" hx-trigger="load" hx-swap="outerHTML"></div>
+        <div class="controls">
+            <div hx-get="/search-element/1" hx-trigger="load" hx-swap="outerHTML"></div>
+        </div>
+    </div>
+{% endblock %}

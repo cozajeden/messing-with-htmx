@@ -31,3 +31,6 @@ docker-compose -f docker-compose-dev.yml up -d
 ## Apps
 
 ### [first_steps](/first_steps/)
+
+>A simple app to learn the basics of htmx.
+

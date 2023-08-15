@@ -57,6 +57,8 @@ services:
       - hx
     ports:
       - "80:80"
+    volumes:
+      - ./static:/static
     networks:
         hx_dev:
 

@@ -6,3 +6,4 @@ daphne
 redis
 channels
 pymongo
+faker
