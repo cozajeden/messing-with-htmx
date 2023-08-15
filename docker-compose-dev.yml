@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+  db-hx:
+    image: db:latest
+    build: dev_db/postgres
+    container_name: db-hx
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_NAME=postgres
+    restart: always
+    networks:
+        hx_dev:
+            ipv4_address: 172.100.0.5
+
+  mongo-hx:
+    image: mongo:latest
+    build: dev_db/mongo
+    container_name: mongo-hx
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+        hx_dev:
+            ipv4_address: 172.100.0.3
+
+  hx:
+    image: hx:latest
+    build: .
+    container_name: hx
+    privileged: true
+    command: sh -c "
+              python manage.py migrate &&
+              daphne -b 0.0.0.0 -p 8000 x.asgi:application"
+    ports:
+      - "8013:8000"
+    env_file:
+      - ./env
+    volumes:
+      - ./:/app
+    restart: always
+    depends_on:
+      - db-hx
+      - mongo-hx
+    networks:
+        hx_dev:
+
+  nginx-hx:
+    image: nginx-hx:latest
+    build:
+      context: .
+      dockerfile: backend/nginx/Dockerfile.dev
+    container_name: nginx-hx
+    restart: always
+    depends_on:
+      - hx
+    ports:
+      - "80:80"
+    networks:
+        hx_dev:
+
+networks:
+  hx_dev:
+    ipam:
+      config:
+        - subnet: 172.100.0.0/16

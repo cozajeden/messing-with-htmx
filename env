@@ -1,0 +1,9 @@
+DEBUG=1
+SECRET_KEY=a3%zpyj4tc!=4825$se_$^_19o*-*b3@t4o9pg413l@f+m7!pn
+DJANGO_ALLOWED_HOSTS=*
+DEFAULT_ENGINE=django.db.backends.postgresql
+DEFAULT_DATABASE=postgres
+DEFAULT_USER=postgres
+DEFAULT_PASSWORD=postgres
+DEFAULT_HOST=db-hx
+DEFAULT_PORT=5432
