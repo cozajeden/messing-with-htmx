@@ -31,7 +31,7 @@ body {
     gap: 10px;
 }
 
-.list-pages > * > * {
+.list-pages > * {
     cursor: pointer;
     font-weight: bolder;
     background-color: var(--primary-color);
@@ -40,6 +40,11 @@ body {
     padding: 0.5rem 1rem;
     text-align: center;
     font-size: 1rem;
+}
+
+.active-page {
+    outline: 1px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .list-header {

@@ -1,5 +1,28 @@
 <div class="list" id="list">
-    <div class="list-header">{{ title }}</div>
-    {% include 'first_steps/components/names.html' %}
-    {% include 'first_steps/components/page_numbers.html' %}
+    <div class="list-header">List of names</div>
+    <div class ="list-items" id="list-items">
+        {% for object in objects %}
+            <div style="display:flex;flex-direction:row;justify-content:flex-start;gap:5px;">
+                <div style="color:red;cursor:pointer;"
+                    hx-delete="/delete/{{ object }}"
+                    hx-target="#list"
+                    hx-swap="outerHTML"
+                    hx-include="[name='name'], [name='page']"
+                >X</div>
+                <div>{{ object }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="list-pages" id="list-pages">
+        {% for p in pages %}
+            <div {% if p == page %}class="active-page"{% endif %}
+                hx-get="/list?page={{ p }}"
+                hx-target="#list"
+                hx-include="[name='name']"
+                hx-swap="outerHTML"
+            ><span>{{ p }}</span>
+            </div>
+        {% endfor %}
+        <input type="hidden" name="page" value="{{ page }}">
+    </div>
 </div> 

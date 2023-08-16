@@ -5,7 +5,27 @@
     <div class="container">
         {% include 'first_steps/components/list.html' %}
         <div class="controls">
-            {% include 'first_steps/components/search_element.html' %}
+            <div>
+                <label for="search-name">Search for name:</label>
+                <input type="text" id="search-name" placeholder="Search..."
+                    hx-get="/list"
+                    hx-trigger="keyup changed"
+                    hx-swap="outerHTML"
+                    hx-target="#list"
+                    name="name"
+                    hx-include="[name='page']"
+                >
+            </div>
+            <div>
+                <label for="add-name">Add name:</label>
+                <input type="text" id="add-name" name="add-name" placeholder="Add...">
+                <button
+                    hx-post="/list/add"
+                    hx-swap="outerHTML"
+                    hx-target="#list"
+                    hx-include="[name='page'], [name='name'], [name='add-name']"
+                >Add</button>
+            </div>
         </div>
     </div>
 {% endblock %}
