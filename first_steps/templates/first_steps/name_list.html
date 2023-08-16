@@ -16,14 +16,17 @@
                     hx-include="[name='page']"
                 >
             </div>
-            <div>
+            <div
+            hx-swap="outerHTML"
+            hx-target="#list"
+            hx-include="[name='page'], [name='name'], [name='add-name']">
                 <label for="add-name">Add name:</label>
-                <input type="text" id="add-name" name="add-name" placeholder="Add...">
-                <button
+                <input type="text" id="add-name" name="add-name" placeholder="Add..."
                     hx-post="/list/add"
-                    hx-swap="outerHTML"
-                    hx-target="#list"
-                    hx-include="[name='page'], [name='name'], [name='add-name']"
+                    hx-trigger="keyup[keyCode==13]"
+                >
+                <button 
+                    hx-post="/list/add"
                 >Add</button>
             </div>
         </div>
