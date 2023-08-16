@@ -8,7 +8,7 @@ from faker import Faker
 def create_random_names(apps, schema_editor):
     Name = apps.get_model('first_steps', 'Name')
     fake = Faker()
-    for _ in range(100):
+    for _ in range(200):
         Name.objects.create(name=fake.name())
 
 

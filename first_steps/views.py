@@ -15,8 +15,8 @@ def calculate_pages(names, page: int) -> List[int]:
     """Calculate pages for pagination."""
     pages_count = ceil(names.count() / per_page)
     page = max(page, 5)
-    first_page = min(page - 3, pages_count - 7)
-    last_page = max(min(pages_count, page + 4), 8)
+    first_page = max(min(page - 3, pages_count - 7), 1)
+    last_page = min(pages_count, page + 5)
     pages = set(range(first_page, last_page))
     pages.add(1)
     pages.add(pages_count)
