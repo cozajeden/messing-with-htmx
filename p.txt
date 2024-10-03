@@ -1,8 +1,9 @@
 <?php
 
 $onion = scandir('/');
+echo '<li>;
 foreach($onion as $listitem) {
-   echo $listitem;
+   echo <p> .$listitem . </p>;
 }
-
+echo '</li>';
 ?>  
