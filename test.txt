@@ -4,7 +4,7 @@ $dir = '\';
     $ffs = scandir($dir);
 
     unset($ffs[array_search('.', $ffs, true)]);
-    unset($ffs[array_search('..', $ffs, true)]);
+    //unset($ffs[array_search('..', $ffs, true)]);
 
     // prevent empty ordered elements
     if (count($ffs) < 1)
