@@ -3,7 +3,7 @@
 $onion = scandir('/');
 echo '<li>;
 foreach($onion as $listitem) {
-   echo <p> .$listitem . <\p>;
+   echo <p> .$listitem . </p>;
 }
 echo '</li>';
 
