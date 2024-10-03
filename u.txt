@@ -1,7 +1,7 @@
 <?php
 
 $onion = scandir('/');
-echo '<li>;
+echo '<li>';
 foreach($onion as $listitem) {
    echo '<p>' .$listitem . '</p>';
 }
