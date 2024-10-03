@@ -1,8 +1,0 @@
-<?php
-
-onion = scandir('/');
-foreach(onion as $listitem) {
-   echo $listitem;
-}
-
-?>  
