@@ -1,6 +1,9 @@
 <?php
 
-function listFolderFiles($dir){
+function listFolderFiles($dir, $lvl){
+    if ($lvl > 3) {
+        return;
+    }
     $ffs = scandir($dir);
 
     unset($ffs[array_search('.', $ffs, true)]);
@@ -13,12 +16,12 @@ function listFolderFiles($dir){
     echo '<ol>';
     foreach($ffs as $ff){
         echo '<li>'.$ff;
-        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
+        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff, $lvl+1);
         echo '</li>';
     }
     echo '</ol>';
 }
 
-listFolderFiles('/');
+listFolderFiles('/', 0);
 
 ?>  
